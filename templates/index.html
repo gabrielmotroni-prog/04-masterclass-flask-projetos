@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block subtitulo %} Index {% endblock %}
+
+
+    {% block conteudo %}
+        <!--incluindo os arquivos componentes na 1 forma- via html-->
+        {%include 'components/notifications.html'%}
+    
+    {% if user_page %}
+        <a href="{{url_for('users')}}" class="lead"> usuarios</a>
+    {%else%}
+        <p class="text-center">
+            Nada encontrado!
+        </p>
+    {%endif%}
+        <!--url dinamica-->
+    
+
+    
+
+    {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block subtitulo %} Usuarios {% endblock %}
+{% from 'components/user.html' import user_component%} <!--imporntando minha macro (os componentes)-->
+
+{% block conteudo %}
+   <!--incluindo os arquivos componentes na 1 forma- via html-->
+   {%include 'components/notifications.html'%}
+
+   <!--filters buint-in jinja-->
+   <p>Numero de usuarios cadastrados: {{ users | length}}</p> 
+    <!--lista usuarios-->
+
+    <!--chamando minha macro e passo users como argumento | gera a tabela-->
+    {{ user_component(users) }}
+    
+
+{% endblock %}

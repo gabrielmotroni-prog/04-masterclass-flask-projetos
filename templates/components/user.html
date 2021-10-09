@@ -1,0 +1,24 @@
+<!-- 2 forma de fazer e usar nosso componentes: a macro-->
+<!--macro en um funcao-->
+<!-- colabora com DRY - dont repete your self - nao fique si reptindo sempre-->
+
+{% macro user_component (users) %}
+
+    <!--lista usuarios-->
+    {% for user in users%} <!-- user. itens quando eh uma lista so-->
+        <!--criacao de variaveis dinamicas-->
+        <!--dessa forma nao precisa ficar retorno varias coisas do app.py-->
+        {% set name = user['name'] %}
+        {% set age = user['age'] %}
+        {% set email = user['email'] %}
+        {% set since = user['since'] %}
+        <ul class="list-group ">      <!--if ternario-->
+            <li class="list-group-item {{'bg-success' if user['active'] else 'bg-danger'}} ">
+                nome => {{ name |  upper }} <br> <!--name eh a variavel-->
+                criado em => {{ since |  formatdate }}  <!--utilizando meu filter-->
+            </li>
+        </ul> 
+    {% endfor %} <br>
+
+
+{%endmacro%}
