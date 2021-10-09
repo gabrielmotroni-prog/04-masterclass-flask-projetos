@@ -1,5 +1,12 @@
 #------------------------------------------
-#  inicia aplicacao
+#  inicie um ambiente virtual
+#------------------------------------------
+1)virtualennv .refactory
+2)source /refactory/bin/activate
+3)pip intall -r requrements.txt
+
+#------------------------------------------
+#  inicie a aplicacao
 #------------------------------------------
 1) python .\main.py
 2) OU python main.py
