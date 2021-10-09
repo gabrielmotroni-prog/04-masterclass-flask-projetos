@@ -1,9 +1,9 @@
 #------------------------------------------
 #  inicie um ambiente virtual
 #------------------------------------------
-1)virtualennv .refactory
-2)source /refactory/bin/activate
-3)pip intall -r requrements.txt
+1)virtualenv .refactory
+2)source .refactory/bin/activate
+3)pip install -r requirements.txt
 
 #------------------------------------------
 #  inicie a aplicacao
