@@ -1,0 +1,41 @@
+{%include 'base.html'%}
+
+{% block conteudo %}
+<div class="mt-5">
+        <a href="{{url_for('index')}}" class="btn btn-info">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                Voltar
+        </a>
+        <table class="table table-striped mt-2">
+                <thead>
+                        <!-- cabecarios-->
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Profile Photo</th>
+                        <th scope="col">Ações</th>
+                </thead>
+                <tbody>
+                        <!--corpo-->
+                        <tr>
+                                <th scope="row">{{user.id}}</th>
+                                <td>{{user.name}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.profile.photo}}</td>
+                                <td>
+                                        <a href="{{url_for('delete', id=user.id)}} " class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash" aria-hidden="true"></i> Deletar
+                                        </a>
+                                </td>
+                        </tr>
+                </tbody>
+        </table>
+</div>
+
+
+
+<br><br>
+<!--url for pega o caminho dinamico da rota-->
+
+
+{% endblock %}
