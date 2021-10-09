@@ -1,5 +1,5 @@
 #arquivo criador/construtor do meu app (funcao create_app)
-from flask import Flask, jsonify, request
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
