@@ -7,7 +7,8 @@ from flask_login import LoginManager
 #repare que esse arquivo app esta dentro da pasta app
 # quem fica no arquivo raiz agr eh o main.py
 
-db = SQLAlchemy() #sqlacemy recebe o app como parameto
+#sqlacemy recebe o app como parameto
+db = SQLAlchemy() 
 
 #parte de login
 login_manager = LoginManager()
