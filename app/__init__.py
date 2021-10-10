@@ -2,7 +2,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-
+from flask_bootstrap import Bootstrap
                                                       
 #repare que esse arquivo app esta dentro da pasta app
 # quem fica no arquivo raiz agr eh o main.py
@@ -12,6 +12,9 @@ db = SQLAlchemy() #sqlacemy recebe o app como parameto
 #parte de login
 login_manager = LoginManager()
 #flask login exige a instalcao do metodos na classe, porem se herdamos usermix ele faz isso pra nos
+
+#boostrap flask
+bootstrap = Bootstrap()
 
 #factory function - construtor do nosso app
 def create_app():
@@ -24,8 +27,9 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     #antes isso era feito la em agr eh feito aqui dentro passando aos contrutores de cada coisa o app
-    db.init_app(app) # passando ao contrutor de db o app
-    login_manager.init_app(app) #passasndo ao contrutor de login_manager o app
+    db.init_app(app) # passando ao contrutor de db ao app
+    login_manager.init_app(app) #passasndo ao contrutor de login_manager ao app
+    bootstrap.init_app(app) # passando bootstrap ao app
 
     #importando as rotas para o app para ele carregar as rotas
     from app import routers

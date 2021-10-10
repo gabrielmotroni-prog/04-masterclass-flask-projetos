@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash # gera
 
 from app.models import User
 from app import db
+from app.forms import LoginForm, RegisterForm # import class LoginForm
 
 
 #atraves desse codigo que recebe o proprio app eu consigo fazer o registro/manipular das rotas aqui 
@@ -39,51 +40,54 @@ def init_app(app):
 
     @app.route ("/register", methods=["GET", "POST"])
     def register():
-        # verifica se a requisicao do usuario eh via post
-        if request.method == "POST":
+        form = RegisterForm()
+
+        if form.validate_on_submit():
+
             user = User()
-            user.name= request.form['name'] # atraves do request conseguimos pegar os dados do form
-            user.email= request.form['email']
+            user.name= form.name.data  
+            user.email= form.email.data
             #criptogrando a senha com hash ao guardar no banco de dados
             #assim que enviamos as senhas para o banco de dados para um hacker nao ter acesso a essa informacao
-            user.password= generate_password_hash(request.form['password'])
+            user.password= generate_password_hash(form.password.data)
             
             db.session.add(user)
             db.session.commit()
 
             return redirect(url_for("index"))
 
-        return render_template("register.html")
+        return render_template("register.html",form=form)
 
     @app.route ("/login", methods=["GET", "POST"])
     def login():
-        #acionado via postdo formulario tentativa de login
-        if request.method == "POST":
-            email = request.form['email']
-            password = request.form['password']
-            remember = request.form['remember']
+        #esse form eh retornado junto ao render template
+        form = LoginForm() 
+        
+        # valida o the CSRF token is missing. Valida o token enviado pelo form.csrf_token
+        if form.validate_on_submit(): 
+            #acionado via postdo formulario tentativa de login
 
-            print(remember)
-            user = User.query.filter_by(email=email).first()
+                # agora pegamos os dados pelo form, nao mais pelo request
+                user = User.query.filter_by(email=form.email.data).first()
 
-            #verifica se usuario existe
-            if not user :
-                flash("Credenciais incorretas")
-                return redirect((url_for("login")))
-            
-            #verifica a senha
-            if not check_password_hash(user.password, password) :
-                flash("Credenciais incorretas")
-                return redirect((url_for("login")))
+                #verifica se usuario existe
+                if not user :
+                    flash("Credenciais incorretas", "danger")
+                    return redirect((url_for("login")))
+                
+                #verifica a senha
+                if not check_password_hash(user.password, form.password.data) :
+                    flash("Credenciais incorretas", "danger")
+                    return redirect((url_for("login")))
 
-            # se for bem sucedido
-            #remeber = vem do html true ou false
-            #duration: uso biblioteca datime time para ajudar converter em dias
-            # eh o tempo de sessao - para o servidor permanecer a sessar por 7 dias no caso
-            login_user(user, remember=remember, duration=timedelta(days=7))
-            return redirect(url_for("index"))
+                # se for bem sucedido
+                #remeber = vem do html true ou false
+                #duration: uso biblioteca datime time para ajudar converter em dias
+                # eh o tempo de sessao - para o servidor permanecer a sessar por 7 dias no caso
+                login_user(user, remember=form.remember.data, duration=timedelta(days=7))
+                return redirect(url_for("index"))
 
-        return render_template("login.html")
+        return render_template("login.html", form=form)
 
     @app.route("/logout")
     def logout():
