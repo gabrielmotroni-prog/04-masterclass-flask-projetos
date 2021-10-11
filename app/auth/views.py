@@ -39,9 +39,9 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for("index"))
+        return redirect(url_for("user.index"))
 
-    return render_template("register.html", form=form)
+    return render_template("auth/register.html", form=form)
 
 @auth.route("/login", methods=["GET", "POST"])
 def login():
@@ -58,12 +58,12 @@ def login():
         # verifica se usuario existe
         if not user:
             flash("Credenciais incorretas", "danger")
-            return redirect((url_for("login")))
+            return redirect((url_for(".login")))
 
         # verifica a senha
         if not check_password_hash(user.password, form.password.data):
             flash("Credenciais incorretas", "danger")
-            return redirect((url_for("login")))
+            return redirect((url_for(".login")))
 
         # se for bem sucedido
         # remeber = vem do html true ou false
@@ -71,12 +71,12 @@ def login():
         # eh o tempo de sessao - para o servidor permanecer a sessar por 7 dias no caso
         login_user(user, remember=form.remember.data,
                     duration=timedelta(days=7))
-        return redirect(url_for("index"))
+        return redirect(url_for("user.index")) #index esta em user
 
-    return render_template("login.html", form=form)
+    return render_template("auth/login.html", form=form)
 
 @auth.route("/logout")
 def logout():
     # metodo importando la em cima com flasklogin
     logout_user()
-    return redirect(url_for("index"))
+    return redirect(url_for("user.index"))

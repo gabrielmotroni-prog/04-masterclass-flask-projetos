@@ -31,7 +31,7 @@ def delete(id): # recebo o parametro pela rota
 @login_required # declara que somente usuario logado tem acesso a essa rota
 def unique(id):
     user = User.query.get(id) # com id podemos usar filter_by ou get: que compara um resultado unico
-    return render_template("user.html", user=user)
+    return render_template("user/user.html", user=user)
 
 
 
