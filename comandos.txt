@@ -1,7 +1,7 @@
 #------------------------------------------
 #  inicie um ambiente virtual
 #------------------------------------------
-1)virtualenv .refactory
+1)virtualenv .refactory  (python3 -> --python=/usr/bin/python3 .refactory)
 2)source .refactory/bin/activate
 3)pip install -r requirements.txt
 

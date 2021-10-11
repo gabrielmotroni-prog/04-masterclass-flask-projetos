@@ -36,21 +36,23 @@ class BookForm(FlaskForm):
     submit = SubmitField("Cadastrar")
 
 class UserBookForm(FlaskForm):
-    #componente select
+    #input select
     book = SelectField("Livro",
-    coerce=int)
+    coerce=int) #informa que trabalharemos com valores do tipo inteiro
 
+    #botao enviar
     submit = SubmitField("Salvar")
     
-    #toda vez que essa classe for instacianda em routes, esse __init__ vai ser chamado primeiro (ele
-    # eh o construtor ) 
+    #construtor
+    #toda vez que essa classe for instacianda em routers, esse __init__ vai ser chamado primeiro
+    # quando construtor for acionado, altere as opcoes do select 'book' para os registros do banco de dados
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        # quando construtor for acionado, altere as opcoes do selelect para os registros do banco de dados
-        self.book.choices = [
-            #cria uma tupla para cada volta
+        self.book.choices = [  #choices sempre esquema que as opcoes sejam TUPLAS
+            #cria uma tupla para cada volta no laco for
             #compreensao de listas
             (book.id, book.name) for book in Book.query.all()
         ]
+
+ 
 

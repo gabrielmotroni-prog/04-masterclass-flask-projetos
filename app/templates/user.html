@@ -36,7 +36,7 @@
         </table>
         <h2 class="text-muted">Books:</h2>
         <ul class="list-group list-group-flush mt-3">
-                {%for book in user.book%} <!--dessa forma acessamos os books relacionados ao user pelo backref-->
+                {%for book in user.books%} <!--dessa forma acessamos os books relacionados ao user pelo backref-->
                         <li class="list-group-item">
                                 {{book.name}}
                         </li>
