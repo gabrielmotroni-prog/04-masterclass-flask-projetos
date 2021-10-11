@@ -6,6 +6,10 @@
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 Voltar
         </a>
+        <a href="{{url_for('user_add_book', id=user.id)}}" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Adicionar Livros
+        </a>
         <table class="table table-striped mt-2">
                 <thead>
                         <!-- cabecarios-->
@@ -30,8 +34,14 @@
                         </tr>
                 </tbody>
         </table>
-</div>
-
+        <h2 class="text-muted">Books:</h2>
+        <ul class="list-group list-group-flush mt-3">
+                {%for book in user.book%} <!--dessa forma acessamos os books relacionados ao user pelo backref-->
+                        <li class="list-group-item">
+                                {{book.name}}
+                        </li>
+                {%endfor%}
+        </ul>
 
 
 <br><br>

@@ -11,6 +11,10 @@
 1) python .\main.py
 2) OU python main.py
 
+#------------------------------------------
+#  flask shell
+#------------------------------------------
+1) flask shell
 
 
 pip install email_validator

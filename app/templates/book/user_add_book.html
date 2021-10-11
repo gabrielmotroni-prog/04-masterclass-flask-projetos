@@ -1,0 +1,10 @@
+{%extends 'base.html'%}
+
+{%from 'bootstrap/form.html' import render_form%}
+
+{%block conteudo%}
+    <!--inclui flash-->
+    {%include 'components/notification.html' %}
+    <!--inclui form passado pela rota-->
+    {{render_form(form)}}
+{%endblock%}

@@ -6,9 +6,9 @@ from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash # gerador / verificador das senhas
 
-from app.models import User
+from app.models import User, Book
 from app import db
-from app.forms import LoginForm, RegisterForm # import class LoginForm
+from app.forms import LoginForm, RegisterForm, BookForm, UserBookForm # import class LoginForm
 
 
 #atraves desse codigo que recebe o proprio app eu consigo fazer o registro/manipular das rotas aqui 
@@ -94,3 +94,26 @@ def init_app(app):
         #metodo importando la em cima com flasklogin
         logout_user()
         return redirect(url_for("index"))
+
+    @app.route("/book/add", methods=["GET", "POST"])
+    def book_add():
+        form = BookForm()
+
+        #se o form passar nas validacoes
+        if form.validate_on_submit():
+            book = Book()
+            book.name = form.name.data
+
+            db.session.add(book)
+            db.session.commit()
+
+            flash("Livro cadastro com sucesso.", "success")
+            return redirect(url_for("book_add"))
+
+        return render_template("book/add.html", form=form)
+
+    #rota responsavel por fazer relacao ente livros e usuario
+    @app.route("/user/<int:id>/add-book")
+    def user_add_book(id):
+        form = UserBookForm()
+        return render_template("book/user_add_book.html", form=form)
