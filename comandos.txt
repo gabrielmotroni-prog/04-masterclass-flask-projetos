@@ -1,7 +1,7 @@
 #------------------------------------------
 #  inicie um ambiente virtual
 #------------------------------------------
-1)virtualenv .refactory  (python3 -> --python=/usr/bin/python3 .refactory)
+1)virtualenv .refactory  (python3 -> virtualenv --python=/usr/bin/python3 .refactory)
 2)source .refactory/bin/activate
 3)pip install -r requirements.txt
 
@@ -16,5 +16,9 @@
 #------------------------------------------
 1) flask shell
 
-
-pip install email_validator
+#------------------------------------------
+#  identacao com autopep8
+#------------------------------------------
+1) atalho SHIFT + ALT + F
+2) selecionar parte do código que necessita alterar e usar TAB pra mover pra direita 
+3) ou SHIFT + TAB pra mover pra esquerda
