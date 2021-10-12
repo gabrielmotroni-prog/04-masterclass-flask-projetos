@@ -3,6 +3,13 @@
 from app import create_app
 import os
 
+#-------------variavel de ambiente
+from dotenv import load_dotenv
+load_dotenv()
+MY_ENV_VAR = os.getenv('MY_ENV_VAR')
+print(MY_ENV_VAR)
+#--------------- 
+
 #create_app returna um app ja construido
 app = create_app()
 
